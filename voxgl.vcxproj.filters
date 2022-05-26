@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\rendering">
+      <UniqueIdentifier>{d7613042-27c7-427a-8cf0-222e7b67a317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rendering">
+      <UniqueIdentifier>{c9d623b1-7b6e-4658-8898-ad4fafc1738e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\res">
+      <UniqueIdentifier>{43ae0cba-7531-4e67-8cd2-f7944d80d3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\data structs">
+      <UniqueIdentifier>{a83f73b5-36fa-452e-bd2e-6ac555581bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\data structs">
+      <UniqueIdentifier>{12dcc149-dadd-4271-b0db-8a9e24688b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modelToVoxels">
+      <UniqueIdentifier>{cebfc7e8-853a-409e-9120-3da4968e339c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modelToVoxels">
+      <UniqueIdentifier>{06e271fa-9a1b-4002-930d-34312badba1c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gl3w.c">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="voxgl.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\data structs</Filter>
+    </ClCompile>
+    <ClCompile Include="SVO.cpp">
+      <Filter>Source Files\data structs</Filter>
+    </ClCompile>
+    <ClCompile Include="DAG.cpp">
+      <Filter>Source Files\data structs</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>Source Files\modelToVoxels</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Source Files\modelToVoxels</Filter>
+    </ClCompile>
+    <ClCompile Include="HashGrid.cpp">
+      <Filter>Source Files\data structs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="voxgl.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\data structs</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="robin_hood.h">
+      <Filter>Header Files\res</Filter>
+    </ClInclude>
+    <ClInclude Include="DAG.h">
+      <Filter>Header Files\data structs</Filter>
+    </ClInclude>
+    <ClInclude Include="SVO.h">
+      <Filter>Header Files\data structs</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Header Files\modelToVoxels</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Header Files\modelToVoxels</Filter>
+    </ClInclude>
+    <ClInclude Include="HashGrid.h">
+      <Filter>Header Files\data structs</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
