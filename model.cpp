@@ -63,11 +63,6 @@ Model::Model(const std::string& modelFile) {
 	for (unsigned int vertex = 0; vertex < vertices.size(); vertex++)
 		vertices[vertex].position = (vertices[vertex].position - vmin) * vdiffmax;
 
-
-	VAO = 0;
-	VBO = 0;
-	IBO = 0;
-
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 

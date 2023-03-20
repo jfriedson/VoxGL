@@ -9,7 +9,7 @@ Camera::Camera() {
 	direction = glm::vec2(0.f, 0.f);
 
 	lastMousePos = glm::vec3(0.f);
-	focused = true;
+	focused = false;
 }
 
 glm::vec3 Camera::facingRay() {

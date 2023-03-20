@@ -11,19 +11,21 @@ public:
 	Texture();
 	~Texture();
 
-	bool LoadTextureNearest(const std::string fileLoc);
-	bool LoadTextureNearest(const aiTexture* texture);
+	bool LoadTextureNearest(const std::string fileLoc, GLuint unit);
+	bool LoadTextureNearest(const aiTexture* texture, GLuint unit);
 
-	bool LoadTextureLinear(const std::string fileLoc);
-	bool LoadTextureLinear(const aiTexture* texture);
+	bool LoadTextureLinear(const std::string fileLoc, GLuint unit);
+	bool LoadTextureLinear(const aiTexture* texture, GLuint unit);
 
-	void UseTexture(int unit);
+	void UseTexture();
 	void clearTexture();
 
 	GLuint getTexID() { return textureID; }
 
 private:
 	GLuint textureID;
+	GLuint textUnit;
+
 	int width, height, bitDepth;
 
 	std::string fileLocation;
