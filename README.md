@@ -16,12 +16,12 @@ Leaf nodes can contain any amount of data desired. For the mesh to voxel convers
 In the future, the SVO class will be templated and the inner node and leaf node struct type will defined by the dependent code.
 
 ## Future Plans
-Template SVO inner node and leaf nodes
+Template SVO inner node and leaf nodes\
 Finish implementing DAG
 
 ## Dependencies
-ASSIMP
-GLFW
-GL3W
-GLM
+ASSIMP\
+GLFW\
+GL3W\
+GLM\
 STB_IMAGE
