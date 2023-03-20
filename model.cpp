@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-Model::Model(const char* modelFile) {
+Model::Model(const std::string& modelFile) {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(modelFile,
-		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices | aiProcess_CalcTangentSpace);
+		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices | aiProcess_ForceGenNormals);// | aiProcess_CalcTangentSpace  aiProcess_SplitLargeMeshes
 
 	if (!scene) {
 		std::cout << "Model " << modelFile << " failed to load: " << importer.GetErrorString() << std::endl;
@@ -35,12 +35,11 @@ Model::Model(const char* modelFile) {
 			vmax = glm::max(vmax, pos);
 
 			const aiVector3D& pTexCoord = model->HasTextureCoords(0) ? model->mTextureCoords[0][vertex] : aiZeroVector;
-			//const aiVector3D& pNormal = model->mNormals[vertex];
+			const aiVector3D& pNormal = model->mNormals[vertex];
 			//const aiVector3D* pTangent = &(model->mTangents[vertex]);
 
-			vertices.emplace_back(pos, glm::vec2(pTexCoord.x, -pTexCoord.y));
-			//glm::vec3(pNormal.x, pNormal.y, pNormal.z),
-			//glm::vec3(pTangent->x, pTangent->y, pTangent->z));
+			vertices.emplace_back(pos, glm::vec2(pTexCoord.x, -pTexCoord.y), glm::vec3(pNormal.x, pNormal.y, pNormal.z));
+			//, glm::vec3(pTangent->x, pTangent->y, pTangent->z));
 		}
 
 		for (unsigned int i = 0; i < model->mNumFaces; i++) {
@@ -53,6 +52,8 @@ Model::Model(const char* modelFile) {
 
 		vertexIdx = vertices.size();
 	}
+
+	std::cout << "triangles being converted: " << indices.size() / 3 << "\n";
 
 
 	glm::vec3 vdiff = 1.f/(vmax - vmin);
@@ -83,8 +84,8 @@ Model::Model(const char* modelFile) {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, texCoords));
 	glEnableVertexAttribArray(1);
-	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(sizeof(glm::vec3) + sizeof(glm::vec2)));
-	//glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(sizeof(glm::vec3) + sizeof(glm::vec2)));
+	glEnableVertexAttribArray(2);
 	//glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(sizeof(glm::vec3) * 2 + sizeof(glm::vec2)));
 	//glEnableVertexAttribArray(3);
 

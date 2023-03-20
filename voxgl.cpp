@@ -6,7 +6,8 @@
 
 namespace voxgl
 {
-	GLFWwindow* createWindow(const char* windowName, int windowWidth, int windowHeight) {
+	GLFWwindow_ptr createWindow(const std::string& windowName, int windowWidth, int windowHeight, bool fullscreen) {
+		// GLFW window creation
 		if (!glfwInit()) {
 			std::cerr << "unable to initialize GLFW" << std::endl;
 			exit(false);
@@ -18,22 +19,27 @@ namespace voxgl
 
 		glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-		glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
+		if (fullscreen)
+			glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+		else
+			glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
 		glfwWindowHint(GLFW_FOCUS_ON_SHOW, GLFW_TRUE);
 
-		glfwWindowHint(GLFW_SAMPLES, 0);
+		glfwWindowHint(GLFW_SAMPLES, 0);	// ray tracing can't utilize MSAA
 
-		GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, windowName, NULL, NULL);
+		GLFWwindow_ptr window{ glfwCreateWindow(windowWidth, windowHeight, windowName.c_str(), fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL)};
+
 		if (window == nullptr) {
 			std::cerr << "unable to create window" << std::endl;
 			glfwTerminate();
 			exit(false);
 		}
 
-		glfwMakeContextCurrent(window);
+		// OpenGL context creation
+		glfwMakeContextCurrent(window.get());
 		glfwSwapInterval(0);
-		glfwSetWindowFocusCallback(window, windowFocusCallback);
-		glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+		glfwSetWindowFocusCallback(window.get(), windowFocusHndlr);
+		glfwSetFramebufferSizeCallback(window.get(), framebufferSizeHndlr);
 
 		if (gl3wInit()) {
 			std::cerr << "unable to initialize GL3W" << std::endl;
@@ -41,9 +47,9 @@ namespace voxgl
 			exit(false);
 		}
 
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetInputMode(window.get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		if (glfwRawMouseMotionSupported())
-			glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+			glfwSetInputMode(window.get(), GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 
 
 		glFrontFace(GL_CCW);
@@ -56,15 +62,15 @@ namespace voxgl
 		glDisable(GL_BLEND);
 		glDisable(GL_MULTISAMPLE);
 
-		return window;
+		return std::move(window);
 	}
 
-	void destroyWindow(GLFWwindow* window) {
-		glfwDestroyWindow(window);
+	void destroyWindow(const std::shared_ptr<GLFWwindow> window) {
+		glfwDestroyWindow(window.get());
 	}
 
 
-	GLuint createShader(std::string filepath, GLenum type) {
+	GLint createShader(const std::string& filepath, GLenum type) {
 		unsigned int shaderHandle = glCreateShader(type);
 		std::string line;
 		std::string shaderStr = "";
@@ -99,7 +105,7 @@ namespace voxgl
 		return shaderHandle;
 	}
 
-	GLuint createProgram(std::vector<GLuint> &shaders) {
+	GLint createProgram(std::vector<GLuint>& shaders) {
 		unsigned int program = glCreateProgram();
 
 		for (const auto& shader : shaders)
@@ -124,14 +130,14 @@ namespace voxgl
 
 
 
-	void windowFocusCallback(GLFWwindow* window, int focused) {
+	void windowFocusHndlr(GLFWwindow* window, int focused) {
 		if (focused)
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		else
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
-	void framebufferSizeCallback(GLFWwindow* window, int framebufferWidth, int framebufferHeight) {
+	void framebufferSizeHndlr(GLFWwindow* window, int framebufferWidth, int framebufferHeight) {
 		glViewport(0, 0, framebufferWidth, framebufferHeight);
 	}
 

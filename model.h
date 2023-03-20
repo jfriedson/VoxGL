@@ -15,16 +15,15 @@ private:
 	struct Vertex {
 		glm::vec3 position;
 		glm::vec2 texCoords;
-		//glm::vec3 normal;
+		glm::vec3 normal;
 		//glm::vec3 tangent;
 
-		Vertex(glm::vec3 position, glm::vec2 texCoords) : //, glm::vec3 normal, glm::vec3 tangent) :
+		Vertex(glm::vec3 position, glm::vec2 texCoords, glm::vec3 normal) : //, glm::vec3 tangent) :
 			position(position),
-			texCoords(texCoords)
-			//normal(normal),
+			texCoords(texCoords),
+			normal(normal)
 			//tangent(tangent)
-		{
-		}
+		{}
 	};
 
 	std::vector<Vertex> vertices;
@@ -33,7 +32,7 @@ private:
 	GLuint VAO, VBO, IBO;
 
 public:
-	Model(const char* modelFile);
+	Model(const std::string& modelFile);
 	~Model();
 
 	void render();

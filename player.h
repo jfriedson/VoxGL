@@ -10,20 +10,23 @@
 
 #include <GLFW/glfw3.h>
 
+#include <memory>
+
 
 class Player
 {
 public:
+	Player();
+
+	void update(const unsigned int timeDelta);
+	void handleInputs(voxgl::GLFWwindow_ptr& window);
+
+	// data
+	Camera camera;
+
 	bool onGround;
 
 	glm::vec3 position;
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
-
-	Camera camera;
-
-	Player();
-
-	void update(unsigned int timeDelta);
-	void handleInputs(GLFWwindow* window);
 };

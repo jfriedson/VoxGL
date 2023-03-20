@@ -31,7 +31,7 @@
     <Filter Include="Source Files\modelToVoxels">
       <UniqueIdentifier>{cebfc7e8-853a-409e-9120-3da4968e339c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\modelToVoxels">
+    <Filter Include="Header Files\traditional 3d model">
       <UniqueIdentifier>{06e271fa-9a1b-4002-930d-34312badba1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -44,9 +44,6 @@
     </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files\data structs</Filter>
     </ClCompile>
     <ClCompile Include="SVO.cpp">
       <Filter>Source Files\data structs</Filter>
@@ -63,6 +60,9 @@
     <ClCompile Include="HashGrid.cpp">
       <Filter>Source Files\data structs</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="voxgl.h">
@@ -70,9 +70,6 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Header Files\rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files\data structs</Filter>
     </ClInclude>
     <ClInclude Include="timer.h">
       <Filter>Header Files\rendering</Filter>
@@ -87,13 +84,16 @@
       <Filter>Header Files\data structs</Filter>
     </ClInclude>
     <ClInclude Include="model.h">
-      <Filter>Header Files\modelToVoxels</Filter>
+      <Filter>Header Files\traditional 3d model</Filter>
     </ClInclude>
     <ClInclude Include="texture.h">
-      <Filter>Header Files\modelToVoxels</Filter>
+      <Filter>Header Files\traditional 3d model</Filter>
     </ClInclude>
     <ClInclude Include="HashGrid.h">
       <Filter>Header Files\data structs</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
